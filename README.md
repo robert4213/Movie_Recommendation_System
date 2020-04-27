@@ -57,7 +57,7 @@ Return:
 
 ### Update Rating Record
 post a new movie rating   
-post localhost/moviesRating   
+post localhost/movieRating   
 Update:   
 {   
     movieId: 123,   
