@@ -308,7 +308,7 @@ def movie_recommend_update(userid, movie_statistics):
             final_recommend_list.append(movie)
 
     final_recommend_list = set(final_recommend_list)
-    unrecommend_list = set(unrecommend_list)
+
     # print("here is the recommend list before remove from unrecommend")
     # print(recommend_list)
 
