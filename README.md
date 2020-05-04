@@ -1,5 +1,10 @@
 # Movie_Recommendation_System
 
+## Database ERD   
+![Database ERD](https://github.com/robert4213/Movie_Recommendation_System/blob/master/SQL_ERD.jpg)
+
+
+
 ## API  
 ### Search   
 get a list of searched movies   
