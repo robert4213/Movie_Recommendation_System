@@ -11,7 +11,11 @@ method one:
 The Run database_query_table.sql file is in mysql. After the file runs, it will automatically generate a Database and all the tables named after the csv file.
 Then you can view the columns in the table by writing a query.
 
-use "table name"; select "columns name" from "Tables".
+use "table name"; 
+select "columns name" from "Tables".
+
+
+
 For example: 
 use 255databse;
 select * from cast_info
