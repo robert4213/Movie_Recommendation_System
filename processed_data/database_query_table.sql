@@ -42,15 +42,15 @@ CREATE TABLE movies_metadata_processed(
 
 LOAD DATA INFILE '/Users/yifanliu/cast_info.csv' INTO TABLE cast_info
   FIELDS TERMINATED BY ',' ;
-LOAD DATA INFILE '‎⁨/Desktop⁩/cast_info.csv' INTO TABLE crew_info
+LOAD DATA INFILE '/Users/yifanliu⁩/crew_info.csv' INTO TABLE crew_info
   FIELDS TERMINATED BY ',' ;
-LOAD DATA INFILE '‎⁨/Desktop⁩/cast_info.csv' INTO TABLE movie_cast
+LOAD DATA INFILE '/Users/yifanliu/movie_cast.csv' INTO TABLE movie_cast
   FIELDS TERMINATED BY ',' ;
-LOAD DATA INFILE '‎⁨/Desktop⁩/cast_info.csv' INTO TABLE movie_crew
+LOAD DATA INFILE '/Users/yifanliu⁩/movie_crew.csv' INTO TABLE movie_crew
   FIELDS TERMINATED BY ',' ;
-LOAD DATA INFILE '‎⁨/Desktop⁩/cast_info.csv' INTO TABLE movies_genre
+LOAD DATA INFILE '/Users/yifanliu/movies_genre.csv' INTO TABLE movies_genre
   FIELDS TERMINATED BY ',' ;
-LOAD DATA INFILE '‎⁨/Desktop⁩/cast_info.csv' INTO TABLE movies_metadata_processed
+LOAD DATA INFILE '/Users/yifanliu⁩/movies_metadata_processed.csv' INTO TABLE movies_metadata_processed
   FIELDS TERMINATED BY ',' ;
 
 
