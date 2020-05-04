@@ -13,7 +13,7 @@ class MovieStatistics:
         self.__total = {}
         try:
             self.__connection_suggestion = mysql.connector.connect(host='localhost',
-                                                                   database='movie_Recommender',
+                                                                   database='255database',
                                                                    user='root',
                                                                    password=password) 
             if self.__connection_suggestion.is_connected():
@@ -25,7 +25,7 @@ class MovieStatistics:
             print("Error while connecting to MySQL", e)
 
         self.__genre_count = {}
-        sql = "SELECT genre,count(id) FROM movie_Recommender.movie_genre " \
+        sql = "SELECT genre,count(id) FROM 255database.movie_genre " \
               "GROUP BY genre "
         self.__cursor_suggestion.execute(sql)
         rows = self.__cursor_suggestion.fetchall()
@@ -34,7 +34,7 @@ class MovieStatistics:
         self.__total.update(self.__genre_count)
 
         self.__cast_count = {}
-        sql = "SELECT name,count(movie_id) FROM movie_Recommender.movie_cast INNER JOIN movie_Recommender.cast_infor " \
+        sql = "SELECT name,count(movie_id) FROM 255database.movie_cast INNER JOIN 255database.cast_infor " \
               "WHERE cast_id = id " \
               "GROUP BY cast_id "
         self.__cursor_suggestion.execute(sql)
@@ -44,7 +44,7 @@ class MovieStatistics:
         self.__total.update(self.__cast_count)
 
         self.__director_count = {}
-        sql = "SELECT name,count(movie_id) FROM movie_Recommender.movie_crew INNER JOIN movie_Recommender.crew_info " \
+        sql = "SELECT name,count(movie_id) FROM 255database.movie_crew INNER JOIN 255database.crew_info " \
               "WHERE crew_id = id AND job = 'Director'" \
               "GROUP BY crew_id "
         self.__cursor_suggestion.execute(sql)
