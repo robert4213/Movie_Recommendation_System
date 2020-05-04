@@ -22,4 +22,6 @@ select * from cast_info
 
 
 Due to Method 1 needs to change the path load csv file, so method 2, you can create the databse using 
-Method 1 needs to change the path after downloading the csv file, so in method 2, you can create a new schema by clicking the fourth icon in the upper left corner to create a new schema called 255database, and then right-click on the Tables in 255database in the left schemas and select table data import wizard. Finally, just click the downloaded csv file in the file path to import successfully.
+Method 1 needs to change the path after downloading the csv file, so in method 2, you can create a new schema by clicking the fourth icon in the upper left corner called "create a new schema" database name: 255database.
+
+And then right-click on the Tables in 255database in the left schemas and select table_data_import_wizard. Finally, just click the downloaded csv file in the file path to import successfully
