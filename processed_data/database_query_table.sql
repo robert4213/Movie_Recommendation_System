@@ -27,17 +27,17 @@ id INT NOT NULL PRIMARY KEY,
 genre VARCHAR(100)
 );
 CREATE TABLE movies_metadata_processed(
-id INT NOT NULL PRIMARY KEY,
-imdb_id INT,
-overview VARCHAR(100),
-popularity VARCHAR(100),
-poster_path VARCHAR(100),
-release_data VARCHAR(100),
-tagline VARCHAR(100),
-title VARCHAR(100),
-vote_average VARCHAR(100),
-vote_count VARCHAR(100),
-collection VARCHAR(100)
+	id int NOT NULL,
+	imdb_id varchar(255),
+	overview text,
+	popularity float,
+	poster_path varchar(255),
+	release_date varchar(255),
+	tagline text,
+	title varchar(255),
+	vote_average DECIMAL(20, 10),
+	vote_count int,
+	collection int
 );
 
 LOAD DATA INFILE '/Users/yifanliu/cast_info.csv' INTO TABLE cast_info
