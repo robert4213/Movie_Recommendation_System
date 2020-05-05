@@ -40,7 +40,7 @@ function Nav() {
     }
     return(
         <Navbar bg={'dark'} variant="dark">
-            <Navbar.Brand href="/">Fancy Movie Recommender</Navbar.Brand>
+            <Navbar.Brand href="/">Movie Recommender</Navbar.Brand>
             <Navbar.Toggle />
             <Navbar.Collapse className="justify-content-end">
                 <Form inline>
