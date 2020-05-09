@@ -40,11 +40,11 @@ function Nav() {
     }
     return(
         <Navbar bg={'dark'} variant="dark">
-            <Navbar.Brand href="/">Movie Recommender</Navbar.Brand>
+            <Navbar.Brand href="/">Fancy Movie Recommender</Navbar.Brand>
             <Navbar.Toggle />
             <Navbar.Collapse className="justify-content-end">
                 <Form inline>
-                    <FormControl type="text" placeholder="Username" className=" mr-sm-2" size={"lg"}
+                    <FormControl type="text" placeholder="User Id" className=" mr-sm-2" size={"lg"}
                         onChange={(event => {
                             setUserId(event.target.value);
                             })

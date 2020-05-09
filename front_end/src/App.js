@@ -8,18 +8,19 @@ import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 
 function App() {
     
-  return [
-      <Nav/>
-      ,
-      <Router>
-          <div className="App">
-              <Switch>
-                  <Route exact path = '/' component={Search}/>
-                  <Route path = '/movie/:id' component={Movie}/>
-              </Switch>
-          </div>
-      </Router>
-  ];
+  return (
+      <div className="wrap">
+          <Nav/>
+          <Router>
+              <div className="App">
+                  <Switch>
+                      <Route exact path = '/' component={Search}/>
+                      <Route path = '/movie/:id' component={Movie} key={window.location.pathname}/>
+                  </Switch>
+              </div>
+          </Router>
+      </div>
+  );
 }
 
 

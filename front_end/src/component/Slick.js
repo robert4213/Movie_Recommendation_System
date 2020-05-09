@@ -7,7 +7,7 @@ import Slick_Card from './Slick_Card';
 
 const config=require('../config/default');
 
-function Slick() {
+function Slick(address,id_type,reload) {
     const [suggestions,setSuggestions] = useState([]);
 
     useEffect(()=>{
@@ -16,8 +16,8 @@ function Slick() {
 
     const getSuggestions = ()=>{
         console.log('getSuggestions');
-        axios.get(config.address+`/movieSuggestion?` +
-            `&userId=${localStorage.getItem('access_token')==='true'?localStorage.getItem("user_id"):''}`)
+        axios.get(config.address+`/${address}?` +
+            `${id_type}=${localStorage.getItem('access_token')==='true'?localStorage.getItem("user_id"):''}`)
             .then(function (response) {
                 // handle success
                 console.log(response);
@@ -46,7 +46,7 @@ function Slick() {
             <Slider {...slickSettings}>
                 {suggestions.length>0? suggestions.map( data =>{
                     console.log('suggestion create');
-                    return Slick_Card(data);
+                    return Slick_Card(data,reload);
                 }):<div>
                     {suggestions}
                 </div>}

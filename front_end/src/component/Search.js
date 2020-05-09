@@ -49,7 +49,7 @@ function Search() {
             <div className="jumbotron">
                 <h3 className="text-center">Search For Any Movie</h3>
                 <form className="form-inline" id="searchForm" >
-                    <input type="text" className="form-control" id="searchText" placeholder="Search Movies... Try: HP"
+                    <input type="text" className="form-control" id="searchText" placeholder="Search Movies... Try: Harry"
                            onChange={(event => {
                                setSearch(event.target.value);
                            })}
@@ -72,7 +72,7 @@ function Search() {
         movie.length>0?<div id='searchMovie' className='row'>{searchMovieList()}</div>:<div/>,
         <div style={{marginBottom:"30px"}}>
             <h2 style={{margin:"20px"}}>You May Like</h2>
-            <Slick/>
+            {Slick('movieSuggestion','userId',false)}
         </div>,
         <div style={{marginBottom:"30px"}}>
             <h2 style={{margin:"20px"}}>Your Rating</h2>

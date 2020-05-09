@@ -6,6 +6,10 @@ import logo from "../logo.svg"
 import Rating from '@material-ui/lab/Rating';
 import Box from '@material-ui/core/Box';
 import {Link} from "react-router-dom";
+import image_not_found from "../not_found.png";
+import Slider from "react-slick";
+import Slick_Card from "./Slick_Card";
+
 
 const config=require('../config/default');
 
@@ -19,19 +23,36 @@ function Movie({match}) {
         avg_rating:3,
         released:'',
         description:'This is description',
-        user_rating:-1
+        user_rating:-1,
+        tag: ''
     });
     const [isLoad,setIsLoad] = useState(true);
     const [error,setError] = useState(null);
     const [rating,setRating] = useState(0);
+    const [suggestions,setSuggestions] = useState([]);
 
 
     useEffect(()=>{
+        window.scrollTo(0,0);
         console.log('effect Activate');
         getMovie();
-    },[]);
+        getSlick();
+    },[match.params.id]);
 
-
+    const getSlick = ()=>{
+        console.log('getSuggestions');
+        axios.get(config.address+`/similarMovie?` +
+            `movieId=${match.params.id}`)
+            .then(function (response) {
+                // handle success
+                console.log(response);
+                setSuggestions(response.data);
+            })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+            })
+    };
 
     const getMovie = ()=>{
         axios.get(config.address+`/movie?` +
@@ -79,6 +100,17 @@ function Movie({match}) {
         }
     };
 
+    const slickSettings = {
+        dots: true,
+        infinite: true,
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 3000,
+        pauseOnHover: true,
+        marginWidth:'10em',
+    };
+
     if(error){
         console.log(error);
         return(
@@ -91,16 +123,19 @@ function Movie({match}) {
             <div>
                 <div className="row">
                     <div className="col-md-4" >
-                        <img src={'https://image.tmdb.org/t/p/original'+movie.poster} className="thumbnail" alt={"Poster"} />
+                        <img src={'https://image.tmdb.org/t/p/original'+movie.poster} className="thumbnail" alt={"Poster"} onError={(e) => {
+                            e.target.src = image_not_found //replacement image imported above
+                        }}/>
                     </div>
                     <div className="col-md-8">
                         <h2 style={{marginBottom:'1em'}}>{movie.title}</h2>
                         <ul className="list-group">
                             <li className="list-group-item"><strong>Genre: </strong> {movie.genre}</li>
                             <li className="list-group-item"><strong>Released: </strong> {movie.released}</li>
-                            <li className="list-group-item"><strong>IMDb Rating: </strong> {movie.avg_rating}</li>
+                            <li className="list-group-item"><strong>TMDb Rating: </strong> {movie.avg_rating}</li>
                             <li className="list-group-item"><strong>Director: </strong> {movie.director}</li>
                             <li className="list-group-item"><strong>Actors: </strong> {movie.actor}</li>
+                            <li className="list-group-item"><strong>Tags you may like: </strong> {movie.tag}</li>
                             <Box component="fieldset" mb={3} borderColor="transparent" style={{marginTop:'2em'}}>
                                 <h4 style={{marginBottom:'1em'}}><strong>User Rating</strong></h4>
                                 {
@@ -129,13 +164,27 @@ function Movie({match}) {
                 </div>
                 <div className="row">
                     <div className="well">
-                        <p>
                             <h3>Description</h3>
                             {movie.description}
-                        </p>
                     </div>
                 </div>
-
+                <div>
+                    <div className="row">
+                        <div className="well">
+                            <h3>Similar Movies</h3>
+                        </div>
+                    </div>
+                    <div style={{width:'70%', marginLeft:'15%'}}>
+                        <Slider {...slickSettings}>
+                            {suggestions.length>0? suggestions.map( data =>{
+                                console.log('suggestion create');
+                                return Slick_Card(data,false);
+                            }):<div>
+                                {suggestions}
+                            </div>}
+                        </Slider>
+                    </div>
+                </div>
                 <div className="row">
                     <div className="well">
                         <Link to={`/`} className="btn btn-primary">
