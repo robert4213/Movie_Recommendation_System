@@ -54,14 +54,14 @@ def RatingRecord(userId=None):
 @app.route('/movie')
 @cross_origin()
 def MovieDetail(movieId=None,userId=None):
-	userId = request.args.get('userId')
 	movieId = request.args.get('movieId') 
+	userId = request.args.get('userId')
 	
 	cur = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
-	cur.execute("Select M.id, M.title, G.genre, M.poster_path, C.name, Cr.name, M.vote_average, M.release_date, M.overview, R.rating from movies_metadata as M left join movie_genre as G on G.id=M.id left join cast_info as C on C.id=G.id left join crew_info as Cr on Cr.id=C.id left join ratings as R on R.movieId=CR.id where userId={0} and movieId={1} "
+	cur.execute("Select M.id, M.title, G.genre, M.poster_path, C.name, Cr.name, M.vote_average, M.release_date, M.overview, R.rating from movies_metadata as M left join movie_genre as G on G.id=M.id left join cast_info as C on C.id=G.id left join crew_info as Cr on Cr.id=C.id left join ratings as R on R.movieId=CR.id where userId={1} and movieId={0} "
 		.format(movieId,userId))
 	result = cur.fetchall()
-	print(json.dumps(result[0],indent=2))
+	print(json.dumps(result,indent=2))
 	return json.dumps(result)
 
 
