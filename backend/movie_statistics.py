@@ -1,7 +1,6 @@
 import mysql.connector
 from mysql.connector import Error
-
-password = 'Ivan1992818'
+import config
 
 
 class MovieStatistics:
@@ -14,9 +13,9 @@ class MovieStatistics:
         try:
             self.__connection_suggestion = mysql.connector.connect(host='localhost',
                                                                    database='database255',
-                                                                   user='root',
-                                                                   password=password) 
-            
+                                                                   user=config.user,
+                                                                   password=config.password)
+
             self.__db_Info_suggestion = self.__connection_suggestion.get_server_info()
             self.__cursor_suggestion = self.__connection_suggestion.cursor()
             print("Movie Statistics Connected to MySQL Server version ", self.__db_Info_suggestion)
@@ -34,7 +33,7 @@ class MovieStatistics:
         self.__total.update(self.__genre_count)
 
         self.__cast_count = {}
-        sql = "SELECT cast_id,name,count(movie_id) FROM movie_cast INNER JOIN cast_info " \
+        sql = "SELECT name,count(movie_id) FROM movie_cast INNER JOIN cast_info " \
               "WHERE cast_id = id " \
               "GROUP BY cast_id "
         self.__cursor_suggestion.execute(sql)

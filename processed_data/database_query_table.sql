@@ -65,6 +65,14 @@ CREATE TABLE ratings (
   PRIMARY KEY (userid, movieid)
 ); 
 
+DROP TABLE IF EXISTS recommend_list;
+CREATE TABLE recommend_list (
+    userid int NOT NULL,
+    movie_list varchar(255),
+    tag varchar(255),
+    PRIMARY KEY (userid)
+);
+
 
 -- load data 
 LOAD DATA local INFILE  'E:/CMPE255/Movie_Recommendation_System/processed_data/cast_info.csv' INTO TABLE cast_info
@@ -97,7 +105,7 @@ ENCLOSED BY '"'
 LINES TERMINATED BY '\r\n' 
 IGNORE 1 ROWS;
 
-LOAD DATA local INFILE 'E:/CMPE255/Movie_Recommendation_System/processed_data/movies_metadata.csv' INTO TABLE movies_metadata_processed
+LOAD DATA local INFILE 'E:/CMPE255/Movie_Recommendation_System/processed_data/movies_metadata.csv' INTO TABLE movies_metadata
 FIELDS TERMINATED BY ',' 
 ENCLOSED BY '"' 
 LINES TERMINATED BY '\r\n' 
