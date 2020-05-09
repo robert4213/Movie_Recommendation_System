@@ -7,7 +7,7 @@ import time
 import math
 from collections import defaultdict
 
-password = ''
+password = 'Ivan1992818'
 
 
 def movie_recommend_update(userid, movie_statistics):
@@ -19,13 +19,13 @@ def movie_recommend_update(userid, movie_statistics):
     """
     try:
         connection_suggestion = mysql.connector.connect(host='localhost',
-                                                        database='255database',
+                                                        database='database255',
                                                         user='root',
                                                         password=password)  
-        if connection_suggestion.is_connected():
-            db_Info_suggestion = connection_suggestion.get_server_info()
-            cursor_suggestion = connection_suggestion.cursor()
-            print("Movie Recommender Connected to MySQL Server version ", db_Info_suggestion)
+        # if connection_suggestion.is_connected():
+        db_Info_suggestion = connection_suggestion.get_server_info()
+        cursor_suggestion = connection_suggestion.cursor()
+        print("Movie Recommender Connected to MySQL Server version ", db_Info_suggestion)
 
     except Error as e:
         print("Error while connecting to MySQL", e)
@@ -37,7 +37,7 @@ def movie_recommend_update(userid, movie_statistics):
     unrecommend_list = []
 
     # get the first 20 most popular movies as the default list
-    sql = "SELECT id FROM 255database.movies_metadata ORDER BY popularity DESC;"
+    sql = "SELECT id FROM database255.movies_metadata ORDER BY popularity DESC;"
     cursor_suggestion.execute(sql)
     rows = cursor_suggestion.fetchall()
     for tup in rows:
@@ -48,7 +48,7 @@ def movie_recommend_update(userid, movie_statistics):
         return default_recommend_list
 
     # get all movie Id that the user rated >=4 into list
-    sql = "SELECT movieId,timestamp,rating FROM 255database.ratings WHERE userid = %s AND rating >= 4"
+    sql = "SELECT movieId,timestamp,rating FROM database255.ratings WHERE userid = %s AND rating >= 4"
     cursor_suggestion.execute(sql, (userid,))
     rows = cursor_suggestion.fetchall()
     # if the user is new, he has not rated any movie, recommend default
@@ -81,7 +81,7 @@ def movie_recommend_update(userid, movie_statistics):
     # get all movie rated within 14 days into list
     recent_list = []
     for movieid in movieid_list:
-        sql = "SELECT timestamp FROM 255database.ratings WHERE userid = %s AND movieid = %s"
+        sql = "SELECT timestamp FROM database255.ratings WHERE userid = %s AND movieid = %s"
         cursor_suggestion.execute(sql, (userid, movieid,))
         rows = cursor_suggestion.fetchall()
         for tup in rows:
@@ -103,7 +103,7 @@ def movie_recommend_update(userid, movie_statistics):
     final_movie_list = []
     for ts in ts_list:
         ts = str(int(ts))
-        sql = "SELECT movieid FROM 255database.ratings WHERE userid = %s AND timestamp = %s"
+        sql = "SELECT movieid FROM database255.ratings WHERE userid = %s AND timestamp = %s"
         cursor_suggestion.execute(sql, (userid, ts,))
         rows = cursor_suggestion.fetchall()
         for tup in rows:
@@ -113,7 +113,7 @@ def movie_recommend_update(userid, movie_statistics):
 
     collection_list = []
     for movieid in movieid_list:
-        sql = "SELECT collection FROM 255database.movies_metadata WHERE id = %s"
+        sql = "SELECT collection FROM database255.movies_metadata WHERE id = %s"
         cursor_suggestion.execute(sql, (movieid,))
         rows = cursor_suggestion.fetchall()
         for tup in rows:
@@ -121,7 +121,7 @@ def movie_recommend_update(userid, movie_statistics):
                 collection_list.append(tup[0])
 
     for collection_id in collection_list:
-        sql = "SELECT id FROM 255database.movies_metadata WHERE collection = %s"
+        sql = "SELECT id FROM database255.movies_metadata WHERE collection = %s"
         cursor_suggestion.execute(sql, (collection_id,))
         rows = cursor_suggestion.fetchall()
         count = 0
@@ -143,7 +143,7 @@ def movie_recommend_update(userid, movie_statistics):
 
     # get all genres into dictionary
     genre_dict = defaultdict(float)
-    sql = "SELECT id, genre FROM 255database.movie_genre " \
+    sql = "SELECT id, genre FROM database255.movie_genre " \
           "WHERE id in %s" % movieid_list_sql
     cursor_suggestion.execute(sql)
     rows = cursor_suggestion.fetchall()
@@ -160,7 +160,7 @@ def movie_recommend_update(userid, movie_statistics):
 
     # get all cast into dictionary
     cast_dict = defaultdict(float)
-    sql = "SELECT movie_id,name FROM 255database.movie_cast INNER JOIN 255database.cast_info " \
+    sql = "SELECT movie_id,name FROM database255.movie_cast INNER JOIN database255.cast_info " \
           "WHERE cast_id = id AND movie_id in %s" % movieid_list_sql
     cursor_suggestion.execute(sql)
     rows = cursor_suggestion.fetchall()
@@ -172,7 +172,7 @@ def movie_recommend_update(userid, movie_statistics):
 
     # get all director into dictionary
     director_dict = defaultdict(float)
-    sql = "SELECT movie_id,name FROM 255database.movie_crew INNER JOIN 255database.crew_info " \
+    sql = "SELECT movie_id,name FROM database255.movie_crew INNER JOIN database255.crew_info " \
           "WHERE crew_id = id AND job = 'Director' AND movie_id in %s " % movieid_list_sql
     cursor_suggestion.execute(sql)
     rows = cursor_suggestion.fetchall()
@@ -214,7 +214,7 @@ def movie_recommend_update(userid, movie_statistics):
     # get genre candidate
     genre_list = list(set(genre_dict.keys()) & set(map(lambda x: x[0], top_tags)))
     if genre_list:
-        sql = "SELECT id, genre FROM 255database.movie_genre " \
+        sql = "SELECT id, genre FROM database255.movie_genre " \
               "WHERE genre in %s" % '(' + ','.join(map(lambda x: "'" + x + "'", genre_list)) + ')'
         cursor_suggestion.execute(sql)
         rows = cursor_suggestion.fetchall()
@@ -224,7 +224,7 @@ def movie_recommend_update(userid, movie_statistics):
     # get cast candidate
     cast_list = list(set(cast_dict.keys()) & set(map(lambda x: x[0], top_tags)))
     if cast_list:
-        sql = "SELECT movie_id,name FROM 255database.movie_cast INNER JOIN 255database.cast_infor " \
+        sql = "SELECT movie_id,name FROM database255.movie_cast INNER JOIN database255.cast_infor " \
               "WHERE cast_id = id AND name in %s" % '(' + ','.join(map(lambda x: "'" + x + "'", cast_list)) + ')'
         cursor_suggestion.execute(sql)
         rows = cursor_suggestion.fetchall()
@@ -234,7 +234,7 @@ def movie_recommend_update(userid, movie_statistics):
     # get director candidate
     director_list = list(set(director_dict.keys()) & set(map(lambda x: x[0], top_tags)))
     if director_list:
-        sql = "SELECT movie_id,name FROM 255database.movie_crew INNER JOIN 255database.crew_info " \
+        sql = "SELECT movie_id,name FROM database255.movie_crew INNER JOIN database255.crew_info " \
               "WHERE crew_id = id AND job = 'Director' " \
               "AND name in %s " % '(' + ','.join(map(lambda x: "'" + x + "'", director_list)) + ')'
 

@@ -1,7 +1,7 @@
 import mysql.connector
 from mysql.connector import Error
 
-password = ''
+password = 'Ivan1992818'
 
 
 class MovieStatistics:
@@ -13,19 +13,19 @@ class MovieStatistics:
         self.__total = {}
         try:
             self.__connection_suggestion = mysql.connector.connect(host='localhost',
-                                                                   database='255database',
+                                                                   database='database255',
                                                                    user='root',
                                                                    password=password) 
-            if self.__connection_suggestion.is_connected():
-                self.__db_Info_suggestion = self.__connection_suggestion.get_server_info()
-                self.__cursor_suggestion = self.__connection_suggestion.cursor()
-                print("Movie Statistics Connected to MySQL Server version ", self.__db_Info_suggestion)
+            
+            self.__db_Info_suggestion = self.__connection_suggestion.get_server_info()
+            self.__cursor_suggestion = self.__connection_suggestion.cursor()
+            print("Movie Statistics Connected to MySQL Server version ", self.__db_Info_suggestion)
 
         except Error as e:
             print("Error while connecting to MySQL", e)
 
         self.__genre_count = {}
-        sql = "SELECT genre,count(id) FROM 255database.movie_genre " \
+        sql = "SELECT genre,count(id) FROM movie_genre " \
               "GROUP BY genre "
         self.__cursor_suggestion.execute(sql)
         rows = self.__cursor_suggestion.fetchall()
@@ -34,7 +34,7 @@ class MovieStatistics:
         self.__total.update(self.__genre_count)
 
         self.__cast_count = {}
-        sql = "SELECT name,count(movie_id) FROM 255database.movie_cast INNER JOIN 255database.cast_infor " \
+        sql = "SELECT cast_id,name,count(movie_id) FROM movie_cast INNER JOIN cast_info " \
               "WHERE cast_id = id " \
               "GROUP BY cast_id "
         self.__cursor_suggestion.execute(sql)
@@ -44,7 +44,7 @@ class MovieStatistics:
         self.__total.update(self.__cast_count)
 
         self.__director_count = {}
-        sql = "SELECT name,count(movie_id) FROM 255database.movie_crew INNER JOIN 255database.crew_info " \
+        sql = "SELECT name,count(movie_id) FROM movie_crew INNER JOIN crew_info " \
               "WHERE crew_id = id AND job = 'Director'" \
               "GROUP BY crew_id "
         self.__cursor_suggestion.execute(sql)
