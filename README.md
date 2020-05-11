@@ -1,5 +1,5 @@
 # Movie Recommendation System
-Youtube link: https://youtu.be/4gl48FXEPNI   
+Tutorial on Youtube: https://youtu.be/4gl48FXEPNI   
 ## Install Tutorial
 ### For Frontend:   
 Open console in front_end folder   
