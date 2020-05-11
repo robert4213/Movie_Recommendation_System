@@ -2,7 +2,7 @@
 
 ## Install Tutorial
 ### For Frontend:   
-Goto front_end folder   
+Open console in front_end folder   
 package install
 ```
 npm install 
@@ -18,7 +18,7 @@ remember to change load file address
 ```
 LOAD DATA local INFILE  '[your location]/Movie_Recommendation_System/processed_data/cast_info.csv' INTO TABLE 
 ```
-Goto backend  folder   
+Open console in backend folder   
 Install package
 ```
 pip install flask
