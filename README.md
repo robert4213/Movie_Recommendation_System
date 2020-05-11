@@ -13,7 +13,7 @@ npm start
 ```
 ### For Backend:
 Run database_query_table.sql in processed_data   
-Download rating_processed.csv file from https://drive.google.com/open?id=1y5f88zJIsDxsnxVRD1dykD9plU2xW2L1   
+Download rating_processed.csv file into <mark>processed_data</mark> from https://drive.google.com/open?id=1y5f88zJIsDxsnxVRD1dykD9plU2xW2L1   
 remember to change load file address     
 ```
 LOAD DATA local INFILE  '[your location]/Movie_Recommendation_System/processed_data/cast_info.csv' INTO TABLE 
