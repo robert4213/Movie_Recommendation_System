@@ -1,5 +1,50 @@
 # Movie_Recommendation_System
 
+## Install Tutorial
+### For Frontend:   
+Goto front_end folder   
+package install
+```
+npm install 
+```
+Run frontend
+```
+npm start
+```
+### For Backend:
+Run database_query_table.sql in processed_data   
+Download rating_processed.csv file from https://drive.google.com/open?id=1y5f88zJIsDxsnxVRD1dykD9plU2xW2L1
+remember to change load file address     
+```
+LOAD DATA local INFILE  '[your location]/Movie_Recommendation_System/processed_data/cast_info.csv' INTO TABLE 
+```
+Goto backend  folder   
+Install package
+```
+pip install flask
+pip install flask_mysqldb
+pip install flask_cors
+pip install mysql_connector_python
+```
+
+You can change db user name and password in config.py
+
+To generate recommended list for all old ratings:
+```
+python movie_recommender.py
+```
+It may take long time to run.   
+   
+Or you can generate certain user's recommend list:
+```
+python movie_recommender_single_user.py [user id]
+```
+Run Backend:
+```
+python app.py
+```
+
+
 ## Database ERD   
 ![Database ERD](https://github.com/robert4213/Movie_Recommendation_System/blob/master/SQL_ERD.jpg)
 
