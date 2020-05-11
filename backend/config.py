@@ -1,2 +1,2 @@
-password = '5557534213'
+password = ''
 user = 'root'

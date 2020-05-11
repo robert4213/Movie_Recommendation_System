@@ -7,6 +7,7 @@ import time
 import math
 from collections import defaultdict
 import config
+import sys
 
 
 def movie_recommend_update(userid, movie_statistics):
@@ -361,23 +362,9 @@ def time_variance(this_time, last_time=datetime.datetime.now()):
 
 #
 if __name__ == "__main__":
-    m = MovieStatistics()
-
     try:
-        connector = mysql.connector.connect(host='localhost',
-                                            database='database255',
-                                            user= config.user,
-                                            password=config.password)
-        if connector.is_connected():
-            db_Info_suggestion = connector.get_server_info()
-            cursor = connector.cursor()
-            print("Movie Recommender Connected to MySQL Server version ", db_Info_suggestion)
-    except Error as e:
-        print("Error while connecting to MySQL", e)
-
-    sql = 'SELECT DISTINCT userid FROM ratings'
-    cursor.execute(sql)
-    rows = cursor.fetchall()
-    for tup in rows:
-        movie_recommend_update(tup[0], m)
+        m = MovieStatistics()
+        movie_recommend_update(int(sys.argv[1]), m)
+    except Exception:
+        print("Error: ", Exception)
 

@@ -20,7 +20,7 @@ function Nav() {
     if (login){
         return(
             <Navbar bg={'dark'} variant="dark">
-                <Navbar.Brand href="/">Fancy Movie Recommender</Navbar.Brand>
+                <Navbar.Brand href="/">Movie Recommender</Navbar.Brand>
                 <Navbar.Toggle />
                 <Navbar.Collapse className="justify-content-end">
                     <Form inline>
@@ -40,11 +40,11 @@ function Nav() {
     }
     return(
         <Navbar bg={'dark'} variant="dark">
-            <Navbar.Brand href="/">Fancy Movie Recommender</Navbar.Brand>
+            <Navbar.Brand href="/">Movie Recommender</Navbar.Brand>
             <Navbar.Toggle />
             <Navbar.Collapse className="justify-content-end">
                 <Form inline>
-                    <FormControl type="text" placeholder="User Id" className=" mr-sm-2" size={"lg"}
+                    <FormControl type="number" placeholder="User Id" className=" mr-sm-2" size={"lg"}
                         onChange={(event => {
                             setUserId(event.target.value);
                             })
