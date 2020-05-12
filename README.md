@@ -27,7 +27,7 @@ pip install flask_cors
 pip install mysql_connector_python
 ```
 
-You can change db user name and password in config.py
+You can change db user name and password in /backend/config.py
 
 To generate recommended list for all old ratings:
 ```
